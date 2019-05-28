@@ -1,5 +1,4 @@
-# comp_chik_zika
-Data and stan model related to the publication: 
+# Multilevel models in epidemiology
+Julien Riou, Institute of Social and Preventive Medicine
 
-Julien Riou, Chiara Poletto, and Pierre-Yves Boëlle. A comparative analysis of
-chikungunya and zika transmission. Epidemics, 19:43–52, 2017.
+Part of the course "Advanced statistical methods for physicists" at the University of Bern (31/5/2019)
