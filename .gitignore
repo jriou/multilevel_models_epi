@@ -1,0 +1,12 @@
+*.aux
+*.log
+*.out
+*.nav
+*.iyt
+*.snm
+*.synctex.gz
+*.toc
+*.Rprogj
+*.Rhistory
+*.Rproj.user
+*.Rproj
