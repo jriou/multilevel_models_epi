@@ -1,4 +1,5 @@
 data {
+  int inference;
   int<lower=1> W; // number of records
   int<lower=0> O_t[W]; // number of reported cases at time t
   real<lower=0> Ostar_t[W]; // exposure at time t
@@ -23,7 +24,7 @@ model {
   rho ~ beta(1,1);
   phi ~ cauchy(0,2.5);
   // likelihood
-  target += neg_binomial_2_lpmf(O_t|lp,sampledisp);
+  if(inference==1) target += neg_binomial_2_lpmf(O_t|lp,sampledisp);
 }
 
 

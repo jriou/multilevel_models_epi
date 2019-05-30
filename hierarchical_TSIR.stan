@@ -1,4 +1,5 @@
 data {
+  int inference;
   int<lower=1> W; // number of records
   int<lower=1> K; // number of islands
   int<lower=1> J; // number of viruses
@@ -76,7 +77,7 @@ model {
   }
 
 // likelihood
-  target += neg_binomial_2_lpmf(O_t|lp,sampledisp);
+  if(inference==1) target += neg_binomial_2_lpmf(O_t|lp,sampledisp);
 }
 
 

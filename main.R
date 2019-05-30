@@ -15,7 +15,22 @@ GUAD_L = list(W=dim(GUAD)[[1]],
               Ostar_t=GUAD$Ostar,
               sumO_t=GUAD$CUM_NCASES,
               pop=GUAD$POP[[1]])
+## Prior predictive check
+GUAD_L$inference=0
+S_GUAD = stan("TSIR_one_island.stan",data=GUAD_L)
+pred = summary(S_GUAD,pars="lp")[[1]] %>%
+  data.frame() %>%
+  rownames_to_column() %>%
+  mutate(WEEK=GUAD$WEEK)
+ggplot() +
+  geom_ribbon(data=pred,aes(x=WEEK,ymin=X2.5.,ymax=X97.5.),alpha=.5,fill="grey70") +
+  geom_point(data=GUAD,aes(x=WEEK,y=NCASES),shape=21,fill="tomato") +
+  labs(x="Week",y="N") +
+  theme_bw()
+ggsave(file="Figures/prior_predictive_check.png",width=6,height=4)
+
 ## Sample
+GUAD_L$inference=1
 S_GUAD = stan("TSIR_one_island.stan",data=GUAD_L)
 ## Results
 print(S_GUAD,pars=c("beta","rho","phi"))

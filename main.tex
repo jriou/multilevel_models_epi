@@ -277,9 +277,10 @@
 }
 
 
+
 \frame{
 	\frametitle{Data}
-
+	
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=9cm]{Figures/Fig1_revised2.pdf}
@@ -287,6 +288,18 @@
 		\caption{Profiles of CHIKV (red) and ZIKV (blue) incidence in nine territories during 2013--2016.}
 	\end{figure}
 }
+
+\frame{
+	\frametitle{Data}
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=8cm]{Figures/data.png}
+		\caption{Weekly number of reported cases of chikungunya in Guadeloupe (Feb. -- Dec. 2014).}
+	\end{figure}
+}
+
+
 
 \frame{
 	\frametitle{Data-generating processes: observation}
@@ -419,6 +432,43 @@
 
 	\end{itemize}
 
+}
+
+
+\frame{
+	\frametitle{One disease, one island: inference}
+	We want to \alert{infer} the values of 3 parameters $\{\rho, \beta, \phi\}$ from data using a \alert{likelihood-based} method:\pause
+				$$\Pr(O_t|\rho,\beta,\phi) = \text{Neg-Binom}\left(S_t \frac{\beta}{N} \sum^5_{n=1}w_{t,n}\frac{O_{t-n}}{\rho},\phi\right) $$ \pause
+	\begin{itemize}
+		\item maximum likelihood $\rightarrow$ point-estimate + interval \pause
+		\item Bayesian approach $\rightarrow$ posterior distributions:
+		$$ \Pr(\rho,\beta,\phi|O_t) \propto \Pr(O_t|\rho,\beta,\phi) \Pr(\rho,\beta,\phi) $$
+	\end{itemize}
+	
+}
+
+\frame{
+	\frametitle{One disease, one island: priors}
+	We need to choose prior distributions for $\{\rho, \beta, \phi\}$:
+	\begin{itemize}
+		\item informative priors: reflect our prior knowledge about the values\pause
+		\item non-informative priors: flat priors (problematic)\pause
+		\item \alert{weakly-informative} priors\footnote{Gelman et al, The Annals of Applied Statistics (2008)}: reflect our knowledge about the magnitude of the values 
+			$$ \rho \sim \text{Beta}(1,1) $$ $$ \beta \sim \text{Exponential}(0.1) $$ $$ \phi \sim \text{Half-Cauchy}(2.5) $$
+
+	\end{itemize}
+	
+}
+
+\frame{
+	\frametitle{One disease, one island: priors}
+	We check the adequacy of these choices by conducting a \alert{prior predictive check}\footnote{Gabry et al, Journal of the Royal Statistical Society (2019)}:
+	\begin{figure}
+	\centering
+	\includegraphics[width=8cm]{Figures/prior_predictive_check.png}
+	\caption{Prior predictive check for the epidemic of Zika virus in Guadeloupe.}
+\end{figure}
+	
 }
 
 
@@ -608,6 +658,9 @@
 	Remember about:
 	\begin{itemize}
 		\item Data-generating mechanisms
+		\vspace{1em}
+				
+		\item Prior predictive checks
 		\vspace{1em}
 		
 		\item Plot model predictions (fit)
